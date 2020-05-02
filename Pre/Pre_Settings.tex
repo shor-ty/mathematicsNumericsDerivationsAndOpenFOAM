@@ -1,0 +1,111 @@
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+%
+%  S E T T I N G S
+%
+%==============================================================================
+
+
+%==============================================================================
+\newif\iffreeversion
+\newcommand{\blend}
+{
+    \iffreeversion
+    \begin{tikzpicture}[remember picture, overlay]
+    \tikzfading[name=fade page,
+        top color=transparent!50,
+        bottom color=transparent!0,
+        middle color=transparent!0]
+    \fill[white,path fading=fade page] (0,0) rectangle (\paperwidth,\paperheight);
+    \path (current page.center) node {\url{https://Holzmann-cfd.com}};
+    \end{tikzpicture}%
+    \fi
+}
+
+\newcommand{\startFading}{\AddToShipoutPictureFG{\blend}}
+\newcommand{\stopFading}[1][\clearpage]{#1\ClearShipoutPictureFG}
+
+
+%==============================================================================
+\definecolor{listingcolor}{gray}{0.90}
+\newcommand{\bbc}{red\xspace}
+
+\lstset{
+      language=c++, emph={fvm,div,Sp,laplacian,fvScalarMatrix,fvc,SuSp,PIMPLE, nOuterCorrectors, turbOnFinalIterOnly, ddt, turbulence, divDevReff, divDevRhoReff, solve, relax, solver, grad, magSqr, scalarField, endl, Info, U, thermo, correct, pow, extracted, fabs, vector},
+      emphstyle=\textbf,
+      captionpos=b,
+      basicstyle=\ttfamily\footnotesize,
+      showspaces=false,
+      showstringspaces=true,
+      extendedchars=true
+}
+
+\lstdefinestyle{std}{
+      tabsize=4,
+      numbers=left,
+      stepnumber=1,
+      numbersep=5pt,
+      numberstyle=\tiny,
+      breaklines=true,
+      breakautoindent=true,
+      postbreak=\space,
+      backgroundcolor=\color{listingcolor},
+      frame=lines
+}
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+
+
+%==============================================================================
+
+\geometry{b5paper, inner=10mm, outer=18mm, bindingoffset=10mm, top=20mm, bottom=25mm}
+
+
+%==============================================================================
+
+\newcommand{\cref}[1]{(\ref{#1})}
+\newcommand{\rmm}{\mathrm}
+\newcommand{\mr}{\mathrm}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\bTau}{\boldsymbol \tau}
+\newcommand{\bTauInco}{\boldsymbol \tau_\mathrm{inco}}
+\newcommand{\X}{\raisebox{2pt}{$\chi$}}
+\newcommand{\ct}{\cellcolor{gray!10}}
+\newcommand{\ctt}{\cellcolor{gray!5}}
+\newcommand{\SIMPLE}{\texttt{SIMPLE}\xspace}
+\newcommand{\SIMPLEC}{\texttt{SIMPLEC}\xspace}
+\newcommand{\SIMPLER}{\texttt{SIMPLER}\xspace}
+\newcommand{\SIMPLEM}{\texttt{SIMPLEM}\xspace}
+\newcommand{\PISO}{\texttt{PISO}\xspace}
+\newcommand{\PIMPLE}{\texttt{PIMPLE}\xspace}
+\renewcommand{\textregistered}{\textsuperscript{\circledR}}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\tr}{^T}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\Co}{\mathrm{Co}}
+\newcommand{\vA}{\textbf{a}}
+\newcommand{\vB}{\textbf{b}}
+\newcommand{\vU}{\textbf{U}}
+\newcommand{\tT}{\textbf{T}}
+\newcommand{\OF}{OpenFOAM\textregistered\xspace}
+\newcommand{\OFV}{7.x\xspace}
+\newcommand{\red}{\color{red}}
+
+
+%==============================================================================
+
+\setlength{\intextsep}{22pt}
+\setlength{\abovecaptionskip}{22pt}
+
+\title{
+  Mathematics, Numerics, Derivations and \OF
+}
+
+%==============================================================================
+
+\author{
+    Tobias Holzmann \\ ~ \\ Tobias.Holzmann\@Holzmann-cfd.com
+}
+
+
+%==============================================================================

@@ -1,0 +1,140 @@
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+%
+%
+\textit{Copyright Tobias Holzmann, \today}
+%
+%
+\vspace{1cm}
+
+
+
+\subsection*{This book covers the following subjects}
+%
+%
+%
+%
+    This book primarily collects aspects of mathematics, numerics, and
+    derivations used in the field of computational fluid dynamics (CFD) and
+    covers a few aspects regarding the open-source project named \OF.
+    The author of the book, Tobias Holzmann, tried to write understandable and
+    transparently. It is a present to the \OF community.
+%
+%
+%
+%
+%
+\subsection*{Differences in the release versions}
+%
+%
+	The release notes of the book are available at \url{https://holzmann-cfd.com}.
+%
+%
+%
+%
+\subsection*{Acknowledgment}
+%
+%
+%
+%
+    A former colleague of Tobias, Dr. Alexander Vakhrushev, is acknowledged for
+    the exciting discussions during his time at the Montanuniversität Leoben
+    as well as the deep insight into different topics such as mathematics and
+    programming in c++. Furthermore, all people listed on Tobias website, which
+    gave knowledgeable remarks to the book, are warmly acknowledged, and Tobias
+    is thankful for the time these people investigated. Additional, Tobias
+    acknowledge his lovely former wife, Andrea Elisabeth Jall, for all support
+    she gave to him and also the improvements and extensions she made to the book.
+
+    Tobias never regret to dedicated his Ph.D. to his former wife and loves to
+    mention her here too.
+%
+%
+%
+
+\subsection*{How to cite?}
+%
+%
+    The citation format depends on the journal one is using or to your personal
+    style. The following citation is just an example based on the format that
+    is used in this document:
+    \vspace{0.5cm}
+%
+%
+\newline
+%
+%
+%
+    Tobias Holzmann. \textit{Mathematics, Numerics, Derivations and OpenFOAM(R)},
+    Holzmann CFD, Release 7.0, URL \url{https://Holzmann-cfd.com},
+    DOI: 10.13140/RG.2.2.27193.36960.
+
+%
+%
+%
+\newpage
+%
+%
+\section*{Outline}
+%
+%
+%
+    This book gives an introduction to the underlying mathematics used in the
+    field of computational fluid dynamics. After presenting the fundamental mathematic
+    aspects, all conservation equations are derived using a finite volume
+    element, d$V$. In the beginning, the derivation of the mass and momentum
+    equation is described. Subsequently, all kinds of the energy equation are
+    discussed and presented, namely the kinetic energy, internal energy, total
+    energy, and the enthalpy equation.
+
+
+    After all relevant equations are derived, the general governing equation is
+    introduced, and it is demonstrated how one can derive different equations
+    while using the general one.
+
+
+    The subsequent chapters discuss the definition of the shear-rate tensor
+    $\boldsymbol \tau$ for Newtonian fluids which is followed by a discussion
+    regarding the analogy of the Cauchy stress tensor $\boldsymbol \sigma$,
+    the shear-rate tensor $\boldsymbol \tau$ as well as the pressure $p$.
+
+
+    At the end of the first part, all equations are given on a
+    \textit{one page summary} page.
+
+
+    Because engineering applications are mostly turbulent, the Reynolds-Averaging
+    methods are presented and explained.
+    Subsequently, the incompressible \hyphenation{Reynolds-Averaged-Navier-Stokes}
+    equations are derived, and finally, the closure problem is discussed in
+    detail. Here, the Reynolds-Stress equation --- which is fully derived in
+    the appendix --- and the analogy to the Cauchy stress tensor is presented.
+
+
+    To close the subject of turbulent flows, the eddy-viscosity theory is
+    introduced, and the equation for the turbulent kinetic energy $k$ and
+    turbulent dissipation $\epsilon$ are deducted. The topic ends with a
+    brief description of the derivation for the compressible
+    Navier-Stokes-Equations equations and its difficulties and validity.
+
+
+    The last chapters of the book are related to the open-source toolbox \OF.
+    First, a detailed explanation of the implementation of the shear-rate tensor
+    calculation in \OF is presented. Here, the c++ code is investigated and
+    compared against the mathematical expression.
+
+
+    Subsequently, a more general discussion of the different pressure-momentum
+    coupling algorithms are presented. Here, primarily the \PIMPLE-algorithm is
+    explained by analyzing an \OF case.
+
+
+    It follows an entire chapter regarding the matrix handling in \OF is
+    given. The reader will get information regarding the constructions of
+    the matrix systems and its units in \OF while analyzing the c++ code.
+
+
+    The last chapter is related to \OF beginners who are seeking for tutorials
+    and some other useful information and websites.
+%
+%
+%==============================================================================

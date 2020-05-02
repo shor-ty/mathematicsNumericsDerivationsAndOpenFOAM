@@ -1,0 +1,78 @@
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+%
+% Mathematics, Numerics, Derivations and OpenFOAM(R)
+% Tobias Holzmann
+% Book Template
+%
+%==============================================================================
+
+\documentclass[b5paper,9pt]{extbook}
+\input{Pre/Pre_Packages}
+\input{Pre/Pre_Settings}
+\raggedbottom
+
+%\freeversiontrue      % << Free
+\freeversionfalse      % << Support Tobias
+
+
+%==============================================================================
+
+\begin{document}
+\pagenumbering{alph}
+\renewcommand\UrlFont{\color{myCiteColor}\rmfamily}
+
+
+%==============================================================================%
+\pagenumbering{roman}
+\include{Chapter/Chapter_Dedicated}
+\include{Chapter/Chapter_Abstract}
+
+{
+    \hypersetup{linkcolor=myCiteColor}
+    \tableofcontents
+}
+
+
+%==============================================================================
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+
+%==============================================================================
+%\include{Chapter/Chapter_MathematicNotation}
+%\include{Chapter/Chapter_ConservationOfMass}
+%\include{Chapter/Chapter_ConservationOfMomentum}
+%\include{Chapter/Chapter_ConservationOfEnergy}
+%\include{Chapter/Chapter_ConservationOfMechanicalEnergy}
+%\include{Chapter/Chapter_ConservationOfInternalEnergy}
+%\include{Chapter/Chapter_ConservationOfEnthalpy}
+%\include{Chapter/Chapter_ConservationEquationEngineers}
+%\include{Chapter/Chapter_EquationSummary}
+%\include{Chapter/Chapter_ShearRateTensor}
+%\include{Chapter/Chapter_CauchyStressTensor}
+%\include{Chapter/Chapter_BulkViscosity}
+%\include{Chapter/Chapter_DeviationOfMomentum}
+%\include{Chapter/Chapter_TurbulenceModelling}
+%\include{Chapter/Chapter_ShearRateTensorFunctionsOpenFoam}
+%\include{Chapter/Chapter_SimplePisoPimple}
+%\include{Chapter/Chapter_Relaxation}
+%\include{Chapter/Chapter_EquationUnits}
+%\include{Chapter/Chapter_OpenFOAMLearning}
+
+
+%==============================================================================
+%\include{Appendix/Appendix_ReynoldsStressEqn}
+
+
+%==============================================================================
+\bibliographystyle{plainnat}
+\bibliography{Bibtex/Bibliothek}
+
+%==============================================================================
+\include{Cover/Cover_LastCoverPage}
+
+
+\end{document}
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
