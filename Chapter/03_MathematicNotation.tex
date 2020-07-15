@@ -1,0 +1,875 @@
+%==============================================================================
+\documentclass[MathematicsNumericsDerivationsAndOpenFOAM.tex]{subfiles}
+\begin{document}
+%==============================================================================
+
+
+\chapter{Basic Mathematics}
+\label{CHAPTER::Mathematics}
+\pagenumbering{arabic}
+%
+%
+%
+    In the field of computational fluid dynamics, the essential point is to
+    understand the equations and mathematics. This knowledge is required if one
+    is going to implement, reorder, or manipulate equations within a defined
+    software or toolbox. There are many ways to represent equations, and thus a
+    brief collection of essential mathematics is given in this chapter. The
+    beauty of mathematics is also described in \cite{JasakPhD, Rappaz, ProgrammersGuide}
+    and \cite{Moukalled15} and other well-known literature.
+
+
+    In the field of numerical simulations, we are dealing with \texttt{tensors}
+    $\textbf{T}^n$ of rank $n$. A \texttt{tensor} stands for any field. A field
+    can represent a scalar, a vector, or the well-known tensor that represents
+    a matrix --- commonly a 3 by 3 matrix in the field of computational fluid
+    dynamics while using the finite volume method; here, the tensor is of rank
+    two. To keep things clear, we use the following definition, which is
+    equivalent to \cite{ProgrammersGuide}:
+%
+%
+	\vspace{0.5cm}
+
+	Zero rank \texttt{tensor} \textbf{T}$^0$ := scalar $a$
+
+	First rank \texttt{tensor} \textbf{T}$^1$ := vector $\textbf{a}$
+
+	Second rank \texttt{tensor} \textbf{T}$^2$ := tensor $\textbf{T}$ (commonly a 3x3 matrix)
+
+	Third rank \texttt{tensor} \textbf{T}$^3$ := tensor $T_{ijk}$
+
+	~\\
+%
+%
+	If the rank of a tensor is larger than zero, the tensor is \texttt{always}
+    written in bold symbols/letters. Tensors that have a rank larger than two
+    are not needed in most equations presented in this book. The only exception
+    is the derivation of the Reynolds-Stress equation.
+%
+%
+\section{Basic Rules for Derivatives}
+%
+%
+	The governing conservation equations in fluid dynamics are partial
+    differential equations. Therefore, a summary of the rules that are needed
+    to manipulate and analyze the equations is presented now.
+
+	Considering the sum of two quantities $\phi$ and $\chi$ that are derived
+    according to $\tau$, the derivative can be split as follows:
+%
+%
+\begin{equation}
+ \frac{\partial (\phi + \chi)}{\partial \tau}
+ =
+ \frac{\partial \phi }{\partial \tau} + \frac{\partial \chi}{\partial \tau} ~.
+\end{equation}
+%
+%
+	If we have the derivative of the product of the two quantities, it is
+    possible to use the \texttt{product rule} to split the term. In other words,
+    we have to keep one quantity constant while deriving  the other one:
+%
+%
+\begin{equation}
+ \frac{\partial \phi \chi}{\partial \tau}
+ =
+ \chi \frac{\partial \phi }{\partial \tau}
++
+ \phi \frac{\partial \chi}{\partial \tau}
+ \label{EQUATION::productRuleCartesian} ~.
+\end{equation}
+%
+%
+    The product rule still holds, if more than two quantities are multiplied
+    such as:
+%
+%
+\begin{equation}
+ \frac{\partial \phi \chi \zeta}{\partial \tau}
+ =
+ \chi \frac{\partial \phi\zeta }{\partial \tau}
++
+ \phi \frac{\partial \chi\zeta}{\partial \tau}
++
+ \zeta \frac{\partial \phi \chi}{\partial \tau}
+\end{equation}
+%
+%
+	A constant quantity $\mathop{C}$ can be taken inside or outside of a
+    derivative without any constrain:
+%
+%
+\begin{equation}
+ \frac{\partial \mathop{C} \phi \chi}{\partial \tau}
+=
+ \mathop{C} \frac{\partial \phi \chi}{\partial \tau} ~.
+\end{equation}
+%
+%
+%
+%
+%
+\section{Einsteins Summation Convention}
+%
+%
+	For vector and tensor equations there are several options of notations. The
+    longest but clearest notation is the Cartesian one. This notation can be
+    abbreviated --- if the equation contains several similar terms which can be
+    summed up --- by applying the Einsteins summation convention. Assuming the
+    sum of the following derivatives of the arbitrary variable $\phi_i$ in
+    $x$, $y$ and $z$ direction (similar to the mass conservation equation),
+    the Cartesian form is given by:
+%
+%
+\begin{equation*}
+ \frac{\partial \phi_x}{\partial x}
++\frac{\partial \phi_y}{\partial y}
++\frac{\partial \phi_z}{\partial z} ~.
+\end{equation*}
+%
+%
+	To simplify this equation, the Einsteins summation convention can be
+    applied. Commonly, the summation sign $\sum$ is neglected to keep things
+    clear:
+%
+%
+\begin{equation}
+  \sum_{i} \frac{\partial \phi_i}{\partial x_i}
+=
+  \frac{\partial \phi_i}{\partial x_i} ~~~~~~ i=x,y,z ~.
+\end{equation}
+%
+%
+    A more complex example that demonstrates the advantage of the Einsteins
+    summation convention is the convective term of the momentum equation (it
+    is not necessary to know the meaning of this terms right now). Due to the
+    fact that the momentum is a vector quantity, the three single terms of each
+    direction are given as:
+%
+%
+\begin{equation*}
+ \frac{\partial u_x u_x}{\partial x}
+ +
+ \frac{\partial u_y u_x}{\partial y}
+ +
+    \frac{\partial u_z u_x}{\partial z}~~~~~~ \mathrm{x-direction},
+\end{equation*}
+%
+%
+\begin{equation*}
+ \frac{\partial u_x u_y}{\partial x}
+ +
+ \frac{\partial u_y u_y}{\partial y}
+ +
+    \frac{\partial u_z u_y}{\partial z}~~~~~~ \mathrm{y-direction},
+\end{equation*}
+%
+%
+\begin{equation*}
+ \frac{\partial u_x u_z}{\partial x}
+ +
+ \frac{\partial u_y u_z}{\partial y}
+ +
+    \frac{\partial u_z u_z}{\partial z}~~~~~~ \mathrm{z-direction}.
+\end{equation*}
+%
+%
+	Applying the Einsteins convention, the nine terms can be represented as
+    follow:
+%
+%
+\begin{equation}
+ \sum_j \sum_i \frac{\partial u_i u_j}{\partial x_i} e_j =  \frac{\partial u_i u_j}{\partial x_i} e_j ~~~~~~i=x,y,z; ~j=x,y,z~.
+\end{equation}
+%
+%
+    The quantity $e_j$ is defined in the next section and represents the unit
+    vector in $x$, $y$, and $z$ direction. If we would neglect the unit vector,
+    we would end up with a single summation of all nine terms. However, as one can
+    see, we have three single summations related to the coordinates $x$, $y$,
+    and $z$. Thus, the unit vector has to be added.
+    The Einsteins summation convention is widely used in literature.
+    Hence, it is essential to know the meaning and how it is applied. The
+    example given above has to be evaluated as follows:
+%
+%
+\begin{itemize}
+    \item Set $j$ to $x$ keep it constant and set $i$ to $x$, $y$, and $z$,
+    \item Set $j$ to $y$ keep it constant and set $i$ to $x$, $y$, and $z$,
+    \item Set $j$ to $z$ keep it constant and set $i$ to $x$, $y$, and $z$.
+\end{itemize}
+%
+%
+    Keep in mind that in most literature the variables $i$ and $j$ are set to
+    $1, 2$ and $3$, which represents the three coordinate directions
+    respectively, compare the next section.
+%
+%
+\section{General Tensor Mathematics}
+%
+%
+	A common and easy way to deal with equations is to use the vector notation
+    instead of the Einsteins summation convention. The vector notation requires
+    knowledge about special mathematics. Therefore, a brief description of
+    different operations which are applied to scalars, vectors and tensors
+    are given now.
+
+	For that purpose arbitrary quantities are defined now: a scalar $\phi$,
+    two vectors \textbf{a} and \textbf{b} and a tensor \textbf{T}:
+%
+%
+\begin{equation*}
+  \textbf{a}
+=
+  \left(
+  \begin{matrix}
+    a_x \\ a_y \\ a_z
+  \end{matrix}
+  \right)
+=
+  \left(
+  \begin{matrix}
+    a_1 \\ a_2 \\ a_3
+  \end{matrix}
+  \right)
+  ~,~~~~~
+  \textbf{b}
+=
+  \left(
+  \begin{matrix}
+    b_x \\ b_y \\ b_z
+  \end{matrix}
+  \right)
+=
+  \left(
+  \begin{matrix}
+    b_1 \\ b_2 \\ b_3
+  \end{matrix}
+  \right)
+  ~,
+\end{equation*}
+%
+%
+\begin{equation*}
+  \textbf{T}
+=
+  \left[
+  \begin{matrix}
+   T_{xx} ~ ~ ~ ~ T_{xy} ~ ~ ~ ~ T_{xz} \\
+   T_{yx} ~ ~ ~ ~ T_{yy} ~ ~ ~ ~ T_{yz} \\
+   T_{zx} ~ ~ ~ ~ T_{zy} ~ ~ ~ ~ T_{zz}
+  \end{matrix}
+  \right]
+=
+  \left[
+  \begin{matrix}
+   T_{11} ~ ~ ~ ~ T_{12} ~ ~ ~ ~ T_{13} \\
+   T_{21} ~ ~ ~ ~ T_{22} ~ ~ ~ ~ T_{23} \\
+   T_{31} ~ ~ ~ ~ T_{32} ~ ~ ~ ~ T_{33}
+  \end{matrix}
+  \right] ~.
+\end{equation*}
+%
+%
+	Depending on the operation of interest, one uses either the numeric
+    indices ($1, 2, 3$) or the space components ($x, y, z$). Furthermore,
+    the unit vectors $\textbf{e}_i$ and the identity matrix $\textbf{I}$
+    are defined as usual:
+%
+%
+\begin{equation*}
+\textbf{e}_1 = \textbf{e}_x = \left( \begin{matrix}   1 \\ 0 \\ 0  \end{matrix}  \right)
+~,~~~
+\textbf{e}_2= \textbf{e}_y = \left( \begin{matrix}   0 \\ 1 \\ 0  \end{matrix}  \right)
+~,~~~
+\textbf{e}_3= \textbf{e}_z = \left( \begin{matrix}   0 \\ 0 \\ 1  \end{matrix}  \right)
+~,~~~
+\textbf{I} = \left[ \begin{matrix}   1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1  \end{matrix}  \right] ~.
+\end{equation*}
+%
+%
+%
+\subsubsection{Simple Operations}
+%
+%
+\begin{itemize}
+    \item The multiplication of a scalar $\phi$ by a vector \textbf{b} results
+    in a vector and is commutative and associative. This is also valid for
+    the multiplication of a scalar $\phi$ and a tensor $\textbf{T}$:
+\end{itemize}
+%
+%
+\begin{equation}
+  \phi \textbf{b} =
+  \left(
+  \begin{matrix}
+    \phi b_x \\ \phi b_y \\ \phi b_z
+  \end{matrix}
+  \right)
+  ,~~~~~
+  \phi\textbf{T}
+=
+  \left[
+  \begin{matrix}
+   \phi T_{xx} ~ ~ ~ ~ \phi T_{xy} ~ ~ ~ ~ \phi T_{xz} \\
+   \phi T_{yx} ~ ~ ~ ~ \phi T_{yy} ~ ~ ~ ~ \phi T_{yz} \\
+   \phi T_{zx} ~ ~ ~ ~ \phi T_{zy} ~ ~ ~ ~ \phi T_{zz}
+  \end{matrix}
+  \right].
+\label{EQUATION::simple}
+\end{equation}
+%
+%
+%
+%
+\subsubsection{The Inner Product}
+%
+%
+\begin{itemize}
+    \item The inner product of two vectors $\textbf{a}$ and $\textbf{b}$
+    produces a scalar $\phi$ and is commutative. This operation is indicated
+    by the dot sign $\bullet$:
+\end{itemize}
+%
+%
+\begin{equation}
+ \phi = \textbf{a} \bullet \textbf{b} = \vA \tr \vB = \sum_{i=1}^{3} a_i b_i ~.
+ \label{EQUATION::innerProductVV}
+\end{equation}
+%
+%
+%
+\begin{itemize}
+    \item The inner product of a vectors $\textbf{a}$ and a tensor
+    $\textbf{T}$ produces a vector $\textbf{b}$ and is non-commutative
+    if the tensor is non-symmetric:
+\end{itemize}
+%
+%
+\begin{equation}
+ \textbf{b} = \textbf{T} \bullet \textbf{a} =
+ \sum_{i=1}^{3}\sum_{j=1}^{3} T_{ij} a_j   \textbf{e}_i
+ =
+  \left(
+  \begin{matrix}
+   T_{11} a_1 ~ ~ + ~ ~ T_{12} a_2 ~ ~ + ~ ~ T_{13} a_3 \\
+   T_{21} a_1 ~ ~ + ~ ~ T_{22} a_2 ~ ~ + ~ ~ T_{23} a_3 \\
+   T_{31} a_1 ~ ~ + ~ ~ T_{32} a_2 ~ ~ + ~ ~ T_{33} a_3
+  \end{matrix}
+  \right).
+  \label{EQUATION::innerProductTV}
+\end{equation}
+%
+%
+\begin{equation}
+ \textbf{b} = \textbf{a} \bullet \textbf{T}
+ =
+ \tT \tr \bullet \vA
+ =
+ \sum_{i=1}^{3}\sum_{j=1}^{3} a_j T_{ji}  \textbf{e}_i
+ =
+  \left(
+  \begin{matrix}
+   a_1 T_{11} ~ ~ + ~ ~ a_2 T_{21} ~ ~ + ~ ~ a_3 T_{31} \\
+   a_1 T_{12} ~ ~ + ~ ~ a_2 T_{22} ~ ~ + ~ ~ a_3 T_{32} \\
+   a_1 T_{13} ~ ~ + ~ ~ a_2 T_{23} ~ ~ + ~ ~ a_3 T_{33}
+  \end{matrix}
+  \right),
+  \label{EQUATION::innerProductVT}
+\end{equation}
+%
+%
+\begin{itemize}
+   \item[] A symmetric tensor is given, if $\textbf{T}_{ij} = \textbf{T}_{ji}$
+   and hence, $\vA\bullet\tT = \tT \bullet \vA$.
+\end{itemize}
+%
+%
+%\begin{itemize}
+% \item The inner product of two tensors $\textbf{T}$ and $\textbf{S}$ results in a tensor $\textbf{V}$ and is non-commutative:
+%\end{itemize}
+%
+%
+%\begin{equation}
+% \textbf{V} = \textbf{T} \bullet \textbf{S} ~ ~ \Longleftrightarrow ~ ~V_{ij} =  T_{ik} S_{kj}
+% \label{EQUATION::innerProductTT}
+%\end{equation}
+%
+%
+%
+%
+\subsubsection{The Double Inner Product}
+%
+%
+\begin{itemize}
+   \item The double inner product of two tensors $\textbf{T}$ and $\textbf{S}$
+   results in a scalar $\phi$ and is commutative. It will be indicated by
+   the colon  $\boldsymbol \colon$ sign:
+\end{itemize}
+%
+%
+\begin{multline}
+ \phi = \textbf{T} \boldsymbol \colon \textbf{S} = \sum_{i=1}^{3}\sum_{j=1}^{3} T_{ij} S_{ij}
+=
+ T_{11} S_{11} + T_{12} S_{12} + T_{13} S_{13} + T_{21} S_{21} \\
++
+ T_{22} S_{22} +
+ T_{23} S_{23} + T_{31} S_{31} + T_{32} S_{32} + T_{33} S_{33} ~.
+\label{EQUATION::doubleInnerProduct}
+\end{multline}
+%
+%
+%
+%
+\subsubsection{The Outer Product}
+%
+%
+\begin{itemize}
+    \item The outer product of two vectors $\textbf{a}$ and $\textbf{b}$,
+    also known as the dyadic product, results in a tensor, is non-commutative
+    and is expressed by the dyadic sign $\otimes$:
+\end{itemize}
+%
+%
+%
+\begin{equation}
+  \textbf{T} = \textbf{a} \otimes \textbf{b} = \textbf{a} \textbf{b}^T =   \left[
+  \begin{matrix}
+   a_xb_x ~ ~ ~ ~ ~ a_xb_y ~ ~ ~ ~ ~ a_xb_z \\
+   a_yb_x ~ ~ ~ ~ ~ a_yb_y ~ ~ ~ ~ ~ a_yb_z \\
+   a_zb_x ~ ~ ~ ~ ~ a_zb_y ~ ~ ~ ~ ~ a_zb_z
+  \end{matrix}
+  \right].
+   \label{EQUATION::dyadic}
+\end{equation}
+%
+%
+	In most of the literature we will find that the dyadic sign $\otimes$ is
+    neglected for brevity as shown below:
+%
+%
+\begin{equation}
+  \textbf{a}\textbf{b}~.
+  \label{EQUATION::outerProduct}
+\end{equation}
+%
+%
+	Keep in mind, that both variants are used in literature whereas the last
+    one is more common, but the first one is mathematically correct. In this
+    book we use the definition of equation (\ref{EQUATION::dyadic}), to be
+    consistent with the mathematics.
+%
+%
+%
+%
+\subsubsection{Differential Operators}
+%
+%
+	In vector notation, the spatial derivative of a variable (scalar, vector
+    or tensor) is made using the Nabla operator $\nabla$. It contains the three
+    space derivatives of $x, y$ and $z$ in a Cartesian coordinate system:
+%
+%
+$$
+  \nabla
+=
+  \left(
+  \begin{matrix}
+    \frac{\partial}{\partial x} \\
+    \frac{\partial}{\partial y} \\
+    \frac{\partial}{\partial z}
+  \end{matrix}
+  \right)
+=
+  \left(
+  \begin{matrix}
+    \frac{\partial}{\partial x_1} \\
+    \frac{\partial}{\partial x_2} \\
+    \frac{\partial}{\partial x_3}
+  \end{matrix}
+  \right) .
+$$
+%
+%
+%
+%
+\subsubsection{Gradient Operator}
+%
+%
+\begin{itemize}
+    \item The gradient of a scalar $\phi$ results in a vector $\textbf{a}$:
+\end{itemize}
+%
+%
+\begin{equation}
+ \operatorname{grad}\phi = \nabla \phi
+=
+  \left(
+  \begin{matrix}
+    \frac{\partial \phi}{\partial x} \\
+    \frac{\partial \phi}{\partial y} \\
+    \frac{\partial \phi}{\partial z}
+  \end{matrix}
+  \right) .
+  \label{EQUATION::gradientScalar}
+\end{equation}
+%
+%
+\begin{itemize}
+    \item The gradient of a vector $\textbf{b}$ results in a tensor $\textbf{T}$:
+\end{itemize}
+%
+%
+\begin{equation}
+ \operatorname{grad}\textbf{b} = \nabla \otimes \textbf{b}
+=
+  \left[
+  \begin{matrix}
+   \frac{\partial}{\partial x}b_x ~ ~ ~ ~ ~ \frac{\partial}{\partial x} b_y ~ ~ ~ ~ ~ \frac{\partial}{\partial x} b_z \\
+   \frac{\partial}{\partial y}b_x ~ ~ ~ ~ ~ \frac{\partial}{\partial y} b_y ~ ~ ~ ~ ~ \frac{\partial}{\partial y} b_z \\
+   \frac{\partial}{\partial z}b_x ~ ~ ~ ~ ~ \frac{\partial}{\partial z} b_y ~ ~ ~ ~ ~ \frac{\partial}{\partial z} b_z
+  \end{matrix}
+  \right] .
+   \label{EQUATION::gradientVector}
+\end{equation}
+%
+%
+	We see that this operation is the outer product of the Nabla operator
+    (a specific vector) and an arbitrary vector $\textbf{b}$. Hence, it is
+    commonly written as:
+%
+%
+\begin{equation}
+  \nabla \textbf{b} ~.
+\end{equation}
+%
+%
+    In this book, we use the first notation (with the dyadic sign) to be
+    consistent within the mathematics. The gradient operation \textit{increases}
+    the rank of the \texttt{tensor} by one and hence, we can apply it to any
+    \texttt{tensor} field.
+%
+%
+%
+%
+\subsubsection{Divergence Operator}
+%
+%
+\begin{itemize}
+    \item The divergence of a vector $\textbf{b}$ results in a scalar $\phi$
+    and is expressed by the combination of the Nabla operator and the dot
+    sign, $\nabla \bullet$:
+\end{itemize}
+%
+%
+\begin{equation}
+ \operatorname{div} \textbf{b} = \nabla \bullet \textbf{b} = \sum_{i=1}^{3} \frac{\partial}{\partial x_i} b_i
+=
+  \frac{\partial b_1}{\partial x_1} + \frac{\partial b_2}{\partial x_2} + \frac{\partial b_3}{\partial x_3} ~.
+  \label{EQUATION::divVector}
+\end{equation}
+%
+%
+\begin{itemize}
+    \item The divergence of a tensor $\textbf{T}$ results in a vector $\textbf{b}$:
+\end{itemize}
+%
+%
+\begin{equation}
+  \operatorname{div} \textbf{T} = \nabla \bullet \textbf{T}
+=
+  \sum_{i=1}^{3}\sum_{j=1}^{3} \frac{\partial}{\partial x_j} T_{ji} \textbf{e}_i
+=
+  \left[
+  \begin{matrix}
+   \frac{\partial T_{11}}{\partial x_1} ~ ~ + ~ ~ \frac{\partial T_{21}}{\partial x_2} ~ ~ + ~ ~ \frac{\partial T_{31}}{\partial x_3} \\
+   \frac{\partial T_{12}}{\partial x_1} ~ ~ + ~ ~ \frac{\partial T_{22}}{\partial x_2} ~ ~ + ~ ~ \frac{\partial T_{32}}{\partial x_3} \\
+   \frac{\partial T_{13}}{\partial x_1} ~ ~ + ~ ~ \frac{\partial T_{23}}{\partial x_2} ~ ~ + ~ ~ \frac{\partial T_{33}}{\partial x_3}
+  \end{matrix}
+  \right] .
+  \label{EQUATION::divTensor}
+\end{equation}
+%
+%
+    The divergence operation \textit{decreases} the rank of the \texttt{tensor}
+    by one. Hence, it does not make sense to apply this operator on a
+    \texttt{scalar}.
+%
+%
+%
+%
+\subsubsection{The Product Rule within the Divergence Operator}
+%
+%
+	If we have a product within a divergence term, we can split the term using
+    the product rule. Based on the \texttt{tensor} ranks inside the divergence,
+    we have to apply different rules, which are presented now.
+%
+%
+\begin{itemize}
+    \item The divergence of the product of a vector \textbf{a} and a scalar
+    $\phi$ can be split as follows and results in a scalar:
+\end{itemize}
+%
+%
+\begin{equation}
+ \nabla \bullet (\textbf{a} \phi)  =  \underbrace{\textbf{a} \bullet \nabla \phi}_{\mathrm{Eqn.~} (\ref{EQUATION::innerProductVV})} + \underbrace{\phi \nabla \bullet \textbf{a}}_{\mathrm{simple~multiplication}}~.
+ \label{EQUATION::productRuleVS}
+\end{equation}
+%
+%
+\begin{itemize}
+    \item The divergence of the outer product (dyadic product) of two vectors
+    \textbf{a} and \textbf{b} can be split as follows and results in a vector:
+\end{itemize}
+%
+%
+\begin{equation}
+ \nabla \bullet (\textbf{a} \otimes \textbf{b})  =  \underbrace{\textbf{a} \bullet \nabla \otimes \textbf{b}}_{\mathrm{Eqn.~}(\ref{EQUATION::innerProductVT})} + \underbrace{\textbf{b} \nabla \bullet \textbf{a}}_{\mathrm{Eqn.~}(\ref{EQUATION::simple})} ~.
+ \label{EQUATION::productRuleVV}
+\end{equation}
+%
+%
+\begin{itemize}
+    \item The divergence of the inner product of a tensor \textbf{T} and a
+    vector $\textbf{b}$ can be split as follows and results in a scalar:
+\end{itemize}
+%
+%
+\begin{equation}
+ \nabla \bullet (\textbf{T} \bullet \textbf{b})  =  \underbrace{\textbf{T} \boldsymbol \colon \nabla \otimes \textbf{b}}_{\mathrm{Eqn.~} (\ref{EQUATION::doubleInnerProduct})} + \underbrace{\textbf{b} \bullet \nabla \bullet \textbf{T}}_{\mathrm{Eqn.~}(\ref{EQUATION::innerProductVV})} ~.
+ \label{EQUATION::productRuleTV}
+\end{equation}
+%
+%
+	If one thinks that the product rule for the inner product of two vectors
+    is missing, think about the result of the inner product of the two vectors
+    and which tensor rank the result will have. After that, ask yourself how
+    the divergence operator will change the rank.
+%
+%
+%
+%
+\subsection{The Total Derivative}
+%
+%
+      The definition of the total derivative of an arbitrary quantity $\phi$
+      --- in the field of fluid dynamics --- is defined as:
+%
+%
+\begin{equation}
+    \frac{\mathrm{D}\phi}{\mathrm{D}t} = \frac{\partial \phi}{\partial t} + \underbrace{\textbf{U}\bullet \nabla \phi}_{\mathrm{inner~product}} ~,
+    \label{EQUATION::totalDerivative}
+\end{equation}
+%
+%
+	where $\textbf{U}$ represents the velocity vector. The last term in
+    equation (\ref{EQUATION::totalDerivative}) denotes the inner product.
+    Depending on the quantity $\phi$ (scalar, vector, tensor, and so on), the
+    correct mathematical expression for the second term on the right hand side
+    (RHS) has to be applied. Example given:
+%
+%
+\begin{itemize}
+    \item If $\phi$ is a scalar, we have to use equation (\ref{EQUATION::innerProductVV}),
+    \item If $\phi$ is a vector, we have to use equation (\ref{EQUATION::innerProductVT}).
+\end{itemize}
+%
+%
+%
+%
+\subsubsection{Short Outline for the Total Derivative}
+%
+%
+	The total derivative is used to represent non-conserved equations. In other
+    words, each conserved equation can be changed into a non-conserved
+    formulation using the continuity equation. In literature people start to
+    derive equations using the total derivative and using the continuity
+    equation to extend the non-conservative formulated equation to the conserved
+    one. Personally, the better way would be to derive  the conserved equation
+    \textit{first} and  using the continuity equation \textit{afterwards} to get
+    the non-conserved form. \textit{Why}? For me it was easier to understand.
+
+
+	The difference between both equations is the frame of reference. In the
+    conserved representation, we have the Euler expression, for non-conserved
+    equations it is the Lagrange expression.
+
+
+	If you have literature that start with the non-conserved form of the
+    equations, the following section should help to understand the following
+    extension (at the moment it is not necessary to understand this equations):
+%
+%
+\begin{itemize}
+    \item Incompressible:
+\end{itemize}
+%
+%
+\begin{equation}
+    \frac{\mathrm{D}\phi}{\mathrm{D}t}
+=
+    \underbrace
+    {
+        \frac{\partial \phi}{\partial t}
+      + \textbf{U}\bullet \nabla \phi
+    }_{\mathrm{non-conserved}}
+ ~~~
+     \boxed
+     { + ~
+        \phi
+        \underbrace
+        {
+            \vphantom{\frac{1}{2}}\left( \nabla \bullet (\textbf{U})\right)
+        }_{\mathrm{continuity~=~0}}
+     } ~.
+\end{equation}
+%
+%
+\begin{itemize}
+    \item Compressible:
+\end{itemize}
+%
+%
+\begin{equation}
+   \rho \frac{\mathrm{D}\phi}{\mathrm{D}t}
+=
+    \underbrace
+    {
+        \rho\left[\frac{\partial \phi}{\partial t}
+      + \textbf{U}\bullet \nabla \phi\right]
+    }_{\mathrm{non-conserved}}
+ ~~~
+    \boxed
+    { + ~
+        \phi
+        \underbrace
+        {
+            \left( \frac{\partial \rho}{\partial t}
+          + \nabla \bullet (\rho \textbf{U})\right)
+        }_{\mathrm{continuity~=~0}}
+    } ~.
+\end{equation}
+%
+%
+	The reason for multiply the continuity equation (second term on the
+    right-hand side) by the quantity $\phi$ comes from the product rule,
+    that is applied to the convective term. After the momentum equation is
+    derived and the conservative form is transformed into the non-conserved
+    one, this statement will get clear.
+%
+%
+%
+%
+\subsection{Matrix Algebra, Deviatoric and Hydrostatic Part}
+%
+%
+	In the field of numerical simulations we are dealing with quantities that
+    are represented by matrices like the stress tensor. Therefore, some basic
+    mathematical expressions and manipulations are introduced now.
+
+
+	Each matrix $\textbf{A}$ can be split into a deviatoric
+    $\textbf{A}^\text{dev}$ and hydrostatic $\textbf{A}^\text{hyd}$ part:
+%
+%
+\begin{equation}
+  \textbf{A}
+=
+  \textbf{A}^\text{hyd}
++
+  \textbf{A}^\text{dev}~.
+  \label{EQUATION::deviatoricHydrostatic}
+\end{equation}
+%
+%
+	The hydrostatic part of the matrix can be expressed as scalar or matrix and
+    is defined by using the trace operator. If one wants to calculate the
+    scalar, we use the following definition:
+%
+%
+\begin{equation}
+  A^\rmm{hyd}
+=
+  \frac{1}{3}\operatorname{tr}(\textbf{A})
+=
+  \frac{1}{3} \sum_{i=1}^{n}(a_{ii}) ~.
+  \label{EQUATION::hydrostaticScalar}
+\end{equation}
+%
+%
+	The operator \texttt{tr} denotes the trace operator and is applied on the
+    matrix. This operator simply sums up the diagonal elements. However, the
+    correct mathematical expression for the hydrostatic part of the matrix
+    $\textbf{A}$ is given by:
+%
+%
+%
+\begin{equation}
+  \textbf{A}^\rmm{hyd}
+=
+  A^\rmm{hyd} \textbf{I}
+=
+  \frac{1}{3}\operatorname{tr}(\textbf{A})\textbf{I}
+=
+  \frac{1}{3} \sum_{i=1}^{n}(a_{ii})\textbf{I} ~.
+  \label{EQUATION::hydrostaticMatrix}
+\end{equation}
+%
+%
+%
+	The deviatoric part $\textbf{A}^\mathrm{dev}$ is given as:
+%
+%
+\begin{equation}
+ \textbf{A}^\mathrm{dev}
+=
+ \textbf{A} - \textbf{A}^\mathrm{hyd}
+=
+ \textbf{A} - \frac{1}{3}\operatorname{tr}(\textbf{A})\textbf{I}~.
+ \label{EQUATION::deviatoric}
+\end{equation}
+%
+%
+	\textbf{Note}: The deviatoric part of a matrix is \textit{traceless}.
+    Hence, $\operatorname{tr}(\textbf{A}^\mathrm{dev}) = 0$; Keep in mind:
+    The trace operator is zero not the diagonal elements.
+%
+%
+%
+%
+%
+\subsection{The Gauss Theorem}
+%
+%
+	In order to transform an equation from the differential to the integral
+    form (or vice versa), it is necessary to know the Gauss theorem. This
+    theorem allows us to establish a relationship between the
+    \textit{fluxes through the surface} of an arbitrary volume element and
+    the \textit{divergence operator on the volume element}:
+%
+%
+\begin{equation}
+ \oint \textbf{a} \cdot \textbf{n} \mathrm{d}S
+=
+ \int (\nabla \bullet \textbf{a}) \mathrm{d}V~.
+ \label{EQUATION::gausstheorem}
+\end{equation}
+%
+%
+	In equation (\ref{EQUATION::gausstheorem}), $\textbf{n}$ represents the
+    surface normal vector pointing outwards, d$S$ the integration with respect
+    to the surface and d$V$ the integration with respect to the volume.
+
+
+	\textbf{Note}: The small dot $\cdot$  denotes the inner product of two
+    vectors (\ref{EQUATION::innerProductVV}). In the following book, we use
+    the small dot in all integrals to sign that we calculate the inner product
+    of a vector \textbf{a} and the \textit{surface normal vector} \textbf{n}.
+    Keep in mind that the small dot expresses exact the same mathematical
+    expression as the bullet.
+
+
+%==============================================================================
+\end{document}
+%==============================================================================
