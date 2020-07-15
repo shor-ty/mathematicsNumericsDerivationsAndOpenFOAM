@@ -3,6 +3,7 @@
 % Mathematics, Numerics, Derivations and OpenFOAM(R)
 % Tobias Holzmann
 % Book Template
+% Update October 2020
 %
 %==============================================================================
 
@@ -24,8 +25,8 @@
 
 %==============================================================================
 \pagenumbering{roman}
-\include{Chapter/Chapter_Dedicated}
-\include{Chapter/Chapter_Abstract}
+\subfile{Chapter/01_Dedicated}
+\subfile{Chapter/02_Abstract}
 
 {
     \hypersetup{linkcolor=myCiteColor}
@@ -39,25 +40,26 @@
 
 
 %==============================================================================
-\include{Chapter/Chapter_MathematicNotation}
-\include{Chapter/Chapter_ConservationOfMass}
-%\include{Chapter/Chapter_ConservationOfMomentum}
-%\include{Chapter/Chapter_ConservationOfEnergy}
-%\include{Chapter/Chapter_ConservationOfMechanicalEnergy}
-%\include{Chapter/Chapter_ConservationOfInternalEnergy}
-%\include{Chapter/Chapter_ConservationOfEnthalpy}
-%\include{Chapter/Chapter_ConservationEquationEngineers}
-%\include{Chapter/Chapter_EquationSummary}
-%\include{Chapter/Chapter_ShearRateTensor}
-%\include{Chapter/Chapter_CauchyStressTensor}
-%\include{Chapter/Chapter_BulkViscosity}
-%\include{Chapter/Chapter_DeviationOfMomentum}
-%\include{Chapter/Chapter_TurbulenceModelling}
-%\include{Chapter/Chapter_ShearRateTensorFunctionsOpenFoam}
-%\include{Chapter/Chapter_SimplePisoPimple}
-%\include{Chapter/Chapter_Relaxation}
-%\include{Chapter/Chapter_EquationUnits}
-%\include{Chapter/Chapter_OpenFOAMLearning}
+\subfile{Chapter/03_MathematicNotation}
+\subfile{Chapter/04_ConservationOfMass}
+\subfile{Chapter/05_ConservationOfMomentum}
+%\include{Chapter/06_ConservationOfEnergy}
+%\include{Chapter/07_ConservationOfMechanicalEnergy}
+%\include{Chapter/08_ConservationOfInternalEnergy}
+%\include{Chapter/09_ConservationOfEnthalpy}
+%\include{Chapter/10_ConservationEquationEngineers}
+%\include{Chapter/11_EquationSummary}
+%\include{Chapter/12_ShearRateTensor}
+%\include{Chapter/13_CauchyStressTensor}
+%\include{Chapter/14_BulkViscosity}
+%\include{Chapter/15_DeviationOfMomentum}
+%\include{Chapter/16_TurbulenceModelling}
+%\include{Chapter/17_ShearRateTensorFunctionsOpenFoam}
+%\include{Chapter/18_SimplePisoPimple}
+\subfile{Chapter/19_FlowCharts}
+%\include{Chapter/20_Relaxation}
+%\include{Chapter/21_EquationUnits}
+%\include{Chapter/22_OpenFOAMLearning}
 
 
 %==============================================================================
